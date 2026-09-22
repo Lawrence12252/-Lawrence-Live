@@ -1,6 +1,7 @@
 {
   "name": "لورنس لايف",
   "short_name": "لورنس لايف",
+  "description": "تطبيق لورنس لايف الرسمي للبث المباشر والتحديات العالمية والدردشة السيادية",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#090812",
