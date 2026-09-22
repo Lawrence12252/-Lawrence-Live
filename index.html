@@ -184,5 +184,23 @@
         <span class="text-3xl">💎</span>
         <h2 class="text-lg font-black text-white mt-1">خزانة الماسات الملكية</h2>
         <div class="text-2xl font-black text-[#8B5CF6] mt-1" id="vault-diamonds-display">850,000 💎</div>
-        <p class="text-xs text-ne
-  
+        <p class="text-xs text-neutral-400 mt-1">رصيدك السيادي القابل للصرف والتحويل المباشر</p>
+        <button type="button" class="mt-3 px-6 py-2 bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-black font-black text-xs rounded-xl shadow-lg active-press cursor-pointer" onclick="withdrawDiamonds()">سحب الرصيد إلى الحساب البنكي</button>
+      </div>
+    </main>
+    <main id="tab-content-profile" class="p-4 space-y-4 tab-section hidden">
+      <div class="bg-[#13121D] border border-[#2C274B] p-4 rounded-2xl space-y-3">
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400 p-1 gold-glow bg-black flex items-center justify-center text-4xl mb-2">🤴</div>
+          <h2 class="text-base font-black text-white">جلالة المالك والمؤسس لورنس</h2>
+          <span class="text-xs bg-[#F59E0B] text-black font-black px-2 py-0.5 rounded-full">حاكم منصة لورنس لايف #1</span>
+        </div>
+        <div class="bg-[#1C1A25] p-3 rounded-xl space-y-1.5 text-xs text-neutral-300">
+          <div class="flex justify-between"><span>معرف المالك:</span><span class="font-mono text-yellow-400 font-bold">#LAW-0001-ROOT</span></div>
+          <div class="flex justify-between"><span>مستوى الحساب:</span><span class="text-purple-400 font-bold">VIP +21 الإمبراطوري</span></div>
+          <div class="flex justify-between"><span>مفتاح الأمان السيادي:</span><span class="text-emerald-400 font-bold">مشفر ومحمي 100% 🛡️</span></div>
+        </div>
+        <button type="button" class="w-full py-2 bg-red-600/20 text-red-400 border border-red-500/40 rounded-xl text-xs font-bold active-press cursor-pointer" onclick="showToast('🔒', 'تم قفل لوحة التحكم السيادية بأمان تام')">إعادة تعيين مفتاح الأمان 🔑</button>
+      </div>
+    </main>
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-
