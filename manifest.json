@@ -1,38 +1,25 @@
 {
-  "name": "لورنس لايف - Lawrence Live",
+  "name": "لورنس لايف",
   "short_name": "لورنس لايف",
-  "description": "المنصة الرسمية للبث المباشر والتحديات العالمية والتحكم السيادي للمالك لورنس #1",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#090812",
   "theme_color": "#8B5CF6",
   "dir": "rtl",
   "lang": "ar",
+  "id": "com.lawrence.live",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "البث المباشر",
-      "url": "/live",
-      "description": "الدخول المباشر لغرفة البث الحي"
-    },
-    {
-      "name": "قبو المالك",
-      "url": "/owner",
-      "description": "قبو التحكم السيادي للمالك #1"
     }
   ]
 }
