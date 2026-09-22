@@ -1,0 +1,11 @@
+name": "Lawrence Live",
+  "short_name": "Lawrence",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#090812",
+  "theme_color": "#F59F0A",
+  "dir": "rtl",
+  "id": "Lawrence Live Official .  App"
+}
