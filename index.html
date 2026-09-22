@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <meta charset="UTF-8">
+  <title>أداة نسخ كود index.html التفاعلي الأسطوري</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Tajawal', sans-serif; background-color: #090812; color: #fff; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-xl w-full bg-[#13121D] border-2 border-[#8B5CF6]/50 rounded-3xl p-6 text-center shadow-2xl space-y-4">
+    <div class="text-5xl animate-bounce">👑</div>
+    <h1 class="text-xl font-black text-white">كود index.html الأسطوري التفاعلي الحي</h1>
+    <p class="text-xs text-neutral-300">يحتوي على: اهتزاز الشاشة الملكي عند اللمس، ومؤثرات الهدايا ثلاثية الأبعاد كاملة الشاشة، وتبديل الأقسام والصفحات الحقيقية فوراً!</p>
+    
+    <button id="copy-btn" onclick="copyFullCode()" class="w-full py-4 bg-gradient-to-r from-[#F59E0B] via-yellow-400 to-[#D97706] text-black font-black text-base rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition cursor-pointer flex items-center justify-center gap-2">
+      <span class="text-2xl">📋</span>
+      <span id="btn-text">اضغط هنا لنسخ الكود التفاعلي الكامل بنقرة واحدة!</span>
+    </button>
+    <div id="copy-success" class="text-xs font-bold text-emerald-400 hidden">✅ تم نسخ الكود التفاعلي بنجاح إلى حافظة هاتفك! اذهب الآن لـ GitHub والصقه.</div>
+
+    <div class="text-right pt-2">
+      <label class="text-xs text-neutral-400 block mb-1">معاينة الكود المنسوخ:</label>
+      <textarea id="raw-code" readonly class="w-full h-36 bg-[#090812] border border-[#2C274B] text-neutral-300 text-xs p-3 rounded-xl font-mono focus:outline-none" onclick="this.select()"><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>لورنس لايف | التحكم السيادي المطلق VIP +21</title>
@@ -12,9 +37,23 @@
   <style>
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { background-color: #090812; color: #FFFFFF; font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif; user-select: none; overflow-x: hidden; }
-    .gold-glow { box-shadow: 0 0 20px rgba(245, 158, 11, 0.45); }
-    .purple-glow { box-shadow: 0 0 20px rgba(139, 92, 246, 0.45); }
-    .active-press:active { transform: scale(0.95); transition: transform 0.08s ease; }
+    .gold-glow { box-shadow: 0 0 25px rgba(245, 158, 11, 0.55); }
+    .purple-glow { box-shadow: 0 0 25px rgba(139, 92, 246, 0.55); }
+    .neon-border { border: 1px solid rgba(139, 92, 246, 0.4); }
+    .active-press:active { transform: scale(0.92); transition: transform 0.08s ease; }
+    .gift-anim { animation: giftPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    @keyframes giftPop {
+      0% { transform: translate(-50%, -50%) scale(0.2) rotate(-15deg); opacity: 0; }
+      50% { transform: translate(-50%, -50%) scale(1.3) rotate(10deg); opacity: 1; }
+      75% { transform: translate(-50%, -50%) scale(1.1) rotate(-5deg); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
+    }
+    .shake-screen { animation: screenShake 0.4s ease-in-out; }
+    @keyframes screenShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px) rotate(-0.5deg); }
+      40%, 80% { transform: translateX(6px) rotate(0.5deg); }
+    }
   </style>
 </head>
 <body class="min-h-screen flex justify-center bg-[#090812] selection:bg-purple-500 pb-28">
@@ -22,13 +61,18 @@
     <span class="text-base" id="toast-icon">👑</span>
     <span id="toast-text">تم تنفيذ الأمر السيادي بنجاح!</span>
   </div>
-  <div class="w-full max-w-md bg-[#0e0d18] min-h-screen border-x border-[#2C274B]/50 flex flex-col relative shadow-2xl">
+  <div id="fullscreen-vfx" class="fixed inset-0 z-50 pointer-events-none flex flex-col items-center justify-center hidden">
+    <div id="vfx-icon" class="text-8xl filter drop-shadow-[0_0_35px_rgba(245,158,11,0.8)]">🐉</div>
+    <div id="vfx-title" class="text-2xl font-black text-yellow-400 mt-3 drop-shadow-md">تنين اللهب الإمبراطوري 3D 🔥</div>
+    <div id="vfx-sender" class="text-sm font-bold text-white bg-black/60 px-4 py-1.5 rounded-full mt-2 border border-yellow-500/40">أرسلها المالك لورنس #1</div>
+  </div>
+  <div id="app-container" class="w-full max-w-md bg-[#0e0d18] min-h-screen border-x border-[#2C274B]/50 flex flex-col relative shadow-2xl transition-transform">
     <header class="sticky top-0 z-40 bg-[#13121D]/90 backdrop-blur-md px-4 py-3 border-b border-[#2C274B] flex items-center justify-between">
       <div class="flex items-center gap-2">
         <button type="button" class="w-10 h-10 rounded-full border-2 border-[#F59E0B] p-0.5 gold-glow overflow-hidden bg-black flex items-center justify-center text-xl cursor-pointer active-press" onclick="showToast('👑', 'مرحباً بجلالة الملك والمؤسس لورنس!')">👑</button>
         <div>
           <h1 class="text-base font-black text-white tracking-wide flex items-center gap-1.5">لورنس لايف <span class="text-[10px] bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-black font-extrabold px-1.5 py-0.5 rounded-full">#1 VIP</span></h1>
-          <p class="text-[11px] text-[#A78BFA] font-medium">البث المباشر والتحديات السيادية</p>
+          <p class="text-[11px] text-[#A78BFA] font-medium" id="header-subtitle">البث المباشر والتحديات السيادية</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -36,40 +80,64 @@
         <button type="button" class="text-xs bg-red-600/20 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-full font-bold animate-pulse active-press flex items-center gap-1.5 cursor-pointer" id="live-btn" onclick="toggleLive()"><span class="w-2 h-2 rounded-full bg-red-500"></span><span id="live-status-text">مباشر</span></button>
       </div>
     </header>
-    <main class="p-4 space-y-4">
+    <div class="bg-[#161427] px-4 py-1.5 border-b border-[#2C274B]/50 flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-2 text-neutral-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span id="live-network-speed">⚡ سرعة البث: 60 FPS • 4K</span>
+      </div>
+      <button type="button" class="text-[#F59E0B] font-bold active-press cursor-pointer hover:underline" onclick="boostBattle(15000)">🔥 حماس الغرفة 99%</button>
+    </div>
+    <main id="tab-content-stream" class="p-4 space-y-4 tab-section block">
       <div class="bg-gradient-to-b from-[#1C1A25] to-[#13121D] border border-[#2C274B] rounded-2xl p-4 relative overflow-hidden shadow-lg">
         <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-[#8B5CF6]/15 rounded-full blur-2xl pointer-events-none"></div>
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <button type="button" class="w-14 h-14 rounded-full border-2 border-[#F59E0B] p-0.5 overflow-hidden gold-glow bg-neutral-900 flex items-center justify-center text-3xl cursor-pointer active-press" onclick="showToast('🤴', 'المالك والمؤسس: لورنس VIP +21')">🤴</button>
+            <button type="button" class="w-14 h-14 rounded-full border-2 border-[#F59E0B] p-0.5 overflow-hidden gold-glow bg-neutral-900 flex items-center justify-center text-3xl cursor-pointer active-press relative" onclick="triggerKingAura()">
+              🤴
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-black"></span>
+            </button>
             <div>
               <div class="flex items-center gap-1.5">
                 <span class="text-lg font-black text-white">المالك لورنس</span>
-                <button type="button" class="text-xs bg-[#F59E0B] text-black font-black px-1.5 py-0.5 rounded cursor-pointer active-press" onclick="showToast('⭐', 'رتبة السيادة المطلقة للمالك: VIP +21')">VIP +21</button>
+                <button type="button" class="text-xs bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-black font-black px-2 py-0.5 rounded-full cursor-pointer active-press shadow" onclick="showToast('⭐', 'رتبة السيادة المطلقة للمالك: VIP +21')">VIP +21</button>
               </div>
-              <p class="text-xs text-neutral-400 font-mono">LAW-0001# • حاكم المنصة</p>
+              <p class="text-xs text-[#A78BFA] font-mono">LAW-0001# • حاكم المنصة المطلق</p>
             </div>
           </div>
-          <button type="button" class="text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer" id="security-btn" onclick="toggleSecurity()">🛡️ تشفير 100%</button>
+          <button type="button" class="text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer flex items-center gap-1" id="security-btn" onclick="toggleSecurity()">🛡️ تشفير 100%</button>
         </div>
         <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-[#2C274B]/60 text-center">
-          <button type="button" class="bg-[#13121D]/80 p-2 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-[#F59E0B]/50 transition flex flex-col items-center" onclick="incrementFollowers()"><div class="text-base font-black text-[#F59E0B]" id="followers-count">1.20M</div><div class="text-[11px] text-neutral-400">متابع سيادي 👆</div></button>
-          <button type="button" class="bg-[#13121D]/80 p-2 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-[#8B5CF6]/50 transition flex flex-col items-center" onclick="incrementDiamonds()"><div class="text-base font-black text-[#8B5CF6]" id="diamonds-count">850,000</div><div class="text-[11px] text-neutral-400">ماسة ملكية 💎</div></button>
-          <button type="button" class="bg-[#13121D]/80 p-2 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-emerald-500/50 transition flex flex-col items-center" onclick="incrementViewers()"><div class="text-base font-black text-emerald-400" id="viewers-count">45.2K</div><div class="text-[11px] text-neutral-400">متفرج نشط 👆</div></button>
+          <button type="button" class="bg-[#13121D]/80 p-2.5 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-[#F59E0B]/50 transition flex flex-col items-center" onclick="incrementFollowers()"><div class="text-base font-black text-[#F59E0B]" id="followers-count">1.20M</div><div class="text-[11px] text-neutral-400">متابع سيادي 👆</div></button>
+          <button type="button" class="bg-[#13121D]/80 p-2.5 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-[#8B5CF6]/50 transition flex flex-col items-center" onclick="incrementDiamonds()"><div class="text-base font-black text-[#8B5CF6]" id="diamonds-count">850,000</div><div class="text-[11px] text-neutral-400">ماسة ملكية 💎</div></button>
+          <button type="button" class="bg-[#13121D]/80 p-2.5 rounded-xl cursor-pointer active-press border border-[#2C274B]/50 hover:border-emerald-500/50 transition flex flex-col items-center" onclick="incrementViewers()"><div class="text-base font-black text-emerald-400" id="viewers-count">45.2K</div><div class="text-[11px] text-neutral-400">متفرج نشط 👆</div></button>
         </div>
       </div>
-      <div class="bg-[#13121D] border border-[#2C274B] rounded-2xl p-4 space-y-3.5 shadow-xl">
+      <div class="bg-[#13121D] border border-[#2C274B] rounded-2xl p-4 space-y-3.5 shadow-xl relative overflow-hidden" id="pk-arena">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2"><span class="text-red-500 font-black text-sm">⚔️ تحدي الـ PK الملكي</span><span class="bg-red-500/20 text-red-400 text-[10px] px-2 py-0.5 rounded font-bold animate-pulse">جولة حاسمة</span></div>
+          <div class="flex items-center gap-2"><span class="text-red-500 font-black text-sm">⚔️ تحدي الـ PK الملكي الحاسم</span><span class="bg-red-500/20 text-red-400 text-[10px] px-2 py-0.5 rounded font-bold animate-pulse">جولة حية</span></div>
           <div class="text-xs text-yellow-400 font-bold bg-[#1C1A25] px-2.5 py-1 rounded border border-yellow-500/30 font-mono" id="pk-timer">⏳ 03:45</div>
         </div>
         <div class="grid grid-cols-2 gap-2.5 text-center">
-          <div class="bg-[#1C1A25] p-3 rounded-xl border border-[#8B5CF6]/60 purple-glow"><div class="text-xs font-bold text-purple-300">👑 الملك لورنس</div><div class="text-sm font-black text-[#F59E0B] mt-0.5" id="lawrence-pts">520,000 pt</div></div>
-          <div class="bg-[#1C1A25] p-3 rounded-xl border border-red-500/40"><div class="text-xs font-bold text-neutral-300">🦅 شاهين دبي</div><div class="text-sm font-black text-red-400 mt-0.5" id="opponent-pts">480,000 pt</div></div>
+          <div class="bg-[#1C1A25] p-3 rounded-xl border border-[#8B5CF6]/60 purple-glow active-press cursor-pointer transition hover:scale-105" onclick="boostBattle(10000)">
+            <div class="text-xs font-bold text-purple-300">👑 الملك لورنس</div>
+            <div class="text-sm font-black text-[#F59E0B] mt-1" id="lawrence-pts">520,000 pt</div>
+            <div class="text-[10px] text-emerald-400 font-bold mt-0.5">انقر للدعم +10K 👆</div>
+          </div>
+          <div class="bg-[#1C1A25] p-3 rounded-xl border border-red-500/40 active-press cursor-pointer transition hover:scale-105" onclick="boostOpponent(5000)">
+            <div class="text-xs font-bold text-neutral-300">🦅 شاهين دبي</div>
+            <div class="text-sm font-black text-red-400 mt-1" id="opponent-pts">480,000 pt</div>
+            <div class="text-[10px] text-red-400 font-bold mt-0.5">خصم التحدي 👆</div>
+          </div>
         </div>
         <div class="space-y-1.5">
-          <div class="w-full h-3.5 bg-red-950/60 rounded-full overflow-hidden flex border border-[#2C274B]"><div class="bg-gradient-to-r from-[#F59E0B] to-[#8B5CF6] h-full transition-all duration-300" id="power-bar" style="width: 52%"></div><div class="bg-red-600 h-full flex-1"></div></div>
-          <div class="flex justify-between text-[11px] font-bold px-1"><span class="text-[#F59E0B]" id="lawrence-pct">التفوق السيادي 52%</span><span class="text-red-400" id="opponent-pct">الخصم 48%</span></div>
+          <div class="w-full h-4 bg-red-950/70 rounded-full overflow-hidden flex border border-[#2C274B] p-0.5 shadow-inner">
+            <div class="bg-gradient-to-r from-[#F59E0B] via-[#A78BFA] to-[#8B5CF6] h-full transition-all duration-300 rounded-full shadow-lg" id="power-bar" style="width: 52%"></div>
+            <div class="bg-red-600 h-full flex-1 rounded-full transition-all duration-300"></div>
+          </div>
+          <div class="flex justify-between text-[11px] font-black px-1">
+            <span class="text-[#F59E0B]" id="lawrence-pct">التفوق السيادي 52%</span>
+            <span class="text-red-400" id="opponent-pct">الخصم 48%</span>
+          </div>
         </div>
         <div class="grid grid-cols-2 gap-2 pt-1">
           <button type="button" class="w-full py-2.5 bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-black font-black text-xs rounded-xl shadow-lg active-press hover:brightness-110 transition cursor-pointer" onclick="boostBattle(25000)">⚡ دعم سيادي +25K</button>
@@ -77,31 +145,31 @@
         </div>
       </div>
       <div>
-        <div class="flex items-center justify-between mb-2.5"><h2 class="text-sm font-black text-white flex items-center gap-1.5">🎁 متجر الهدايا والمؤثرات ثلاثية الأبعاد</h2><span class="text-[11px] text-[#A78BFA] font-bold">VIP 21+</span></div>
+        <div class="flex items-center justify-between mb-2.5"><h2 class="text-sm font-black text-white flex items-center gap-1.5">🎁 متجر الهدايا والمؤثرات ثلاثية الأبعاد</h2><span class="text-[11px] text-[#A78BFA] font-bold">VIP 21+ حصرية</span></div>
         <div class="grid grid-cols-2 gap-2.5">
-          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md">
-            <div class="text-3xl mb-1 animate-bounce">🐉</div>
+          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md hover:border-red-500/50 transition">
+            <div class="text-4xl mb-1 animate-bounce cursor-pointer active-press" onclick="sendGift('تنين اللهب 3D 🔥', 50000, '🐉')">🐉</div>
             <div class="text-xs font-bold text-white">تنين اللهب 3D</div>
             <div class="text-[11px] text-[#F59E0B] font-black mt-0.5">50,000 🪙</div>
-            <button type="button" class="mt-2 w-full py-1.5 bg-red-600 hover:bg-red-500 text-white text-[11px] font-black rounded-lg active-press shadow cursor-pointer transition" onclick="sendGift('تنين اللهب 3D 🔥', 50000)">إرسال فوري 🚀</button>
+            <button type="button" class="mt-2 w-full py-1.5 bg-red-600 hover:bg-red-500 text-white text-[11px] font-black rounded-lg active-press shadow cursor-pointer transition" onclick="sendGift('تنين اللهب 3D 🔥', 50000, '🐉')">إطلاق التنين 🚀</button>
           </div>
-          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md">
-            <div class="text-3xl mb-1 animate-pulse">👑</div>
+          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md hover:border-yellow-500/50 transition">
+            <div class="text-4xl mb-1 animate-pulse cursor-pointer active-press" onclick="sendGift('التاج الإمبراطوري 3D 👑', 30000, '👑')">👑</div>
             <div class="text-xs font-bold text-white">التاج الإمبراطوري 3D</div>
             <div class="text-[11px] text-[#F59E0B] font-black mt-0.5">30,000 🪙</div>
-            <button type="button" class="mt-2 w-full py-1.5 bg-[#8B5CF6] hover:bg-purple-600 text-white text-[11px] font-black rounded-lg active-press shadow cursor-pointer transition" onclick="sendGift('التاج الإمبراطوري 3D 👑', 30000)">إرسال التاج ✨</button>
+            <button type="button" class="mt-2 w-full py-1.5 bg-[#8B5CF6] hover:bg-purple-600 text-white text-[11px] font-black rounded-lg active-press shadow cursor-pointer transition" onclick="sendGift('التاج الإمبراطوري 3D 👑', 30000, '👑')">تتويج الملك ✨</button>
           </div>
-          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md">
-            <div class="text-3xl mb-1">🏰</div>
+          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md hover:border-purple-500/50 transition">
+            <div class="text-4xl mb-1 cursor-pointer active-press" onclick="sendGift('قصر السلاطين 3D 🏰', 20000, '🏰')">🏰</div>
             <div class="text-xs font-bold text-white">قصر السلاطين 3D</div>
             <div class="text-[11px] text-[#F59E0B] font-black mt-0.5">20,000 🪙</div>
-            <button type="button" class="mt-2 w-full py-1.5 bg-[#1C1A25] border border-[#8B5CF6]/50 text-purple-300 text-[11px] font-black rounded-lg active-press hover:bg-[#8B5CF6]/20 shadow cursor-pointer transition" onclick="sendGift('قصر السلاطين 3D 🏰', 20000)">إرسال القصر 🎁</button>
+            <button type="button" class="mt-2 w-full py-1.5 bg-[#1C1A25] border border-[#8B5CF6]/50 text-purple-300 text-[11px] font-black rounded-lg active-press hover:bg-[#8B5CF6]/20 shadow cursor-pointer transition" onclick="sendGift('قصر السلاطين 3D 🏰', 20000, '🏰')">إرسال القصر 🎁</button>
           </div>
-          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md">
-            <div class="text-3xl mb-1">🌌</div>
+          <div class="bg-[#161427] border border-[#2C274B] p-3 rounded-xl flex flex-col items-center text-center shadow-md hover:border-cyan-500/50 transition">
+            <div class="text-4xl mb-1 cursor-pointer active-press" onclick="sendGift('المجرة الكونية 3D 🌌', 15000, '🌌')">🌌</div>
             <div class="text-xs font-bold text-white">المجرة الكونية 3D</div>
             <div class="text-[11px] text-[#F59E0B] font-black mt-0.5">15,000 🪙</div>
-            <button type="button" class="mt-2 w-full py-1.5 bg-[#1C1A25] border border-[#8B5CF6]/50 text-purple-300 text-[11px] font-black rounded-lg active-press hover:bg-[#8B5CF6]/20 shadow cursor-pointer transition" onclick="sendGift('المجرة الكونية 3D 🌌', 15000)">إرسال المجرة 🎁</button>
+            <button type="button" class="mt-2 w-full py-1.5 bg-[#1C1A25] border border-[#8B5CF6]/50 text-purple-300 text-[11px] font-black rounded-lg active-press hover:bg-[#8B5CF6]/20 shadow cursor-pointer transition" onclick="sendGift('المجرة الكونية 3D 🌌', 15000, '🌌')">إرسال المجرة 🎁</button>
           </div>
         </div>
       </div>
@@ -111,33 +179,34 @@
           <button type="button" class="py-2.5 bg-[#1C1A25] border border-neutral-700 text-xs font-bold text-neutral-200 rounded-xl active-press hover:border-yellow-500 transition cursor-pointer" onclick="triggerCamera()">📹 كاميرا البث 4K</button>
           <button type="button" class="py-2.5 bg-[#1C1A25] border border-neutral-700 text-xs font-bold text-neutral-200 rounded-xl active-press hover:border-purple-500 transition cursor-pointer" onclick="resetPK()">🔄 تصفير جولة الـ PK</button>
         </div>
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button type="button" class="py-2.5 bg-gradient-to-r from-emerald-600/30 to-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300 rounded-xl active-press cursor-pointer" onclick="withdrawDiamonds()">💰 سحب الأرباح السيادية</button>
+          <button type="button" class="py-2.5 bg-gradient-to-r from-purple-600/30 to-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300 rounded-xl active-press cursor-pointer" onclick="toggleAudienceChat()">💬 إدارة شات المتابعين</button>
+        </div>
       </div>
     </main>
-    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#13121D]/95 backdrop-blur-lg border-t border-[#2C274B] py-2 px-4 flex justify-between items-center z-50">
-      <button type="button" class="nav-tab flex flex-col items-center gap-0.5 text-[#F59E0B] active-press cursor-pointer" onclick="switchTab(this, '📡 بث مباشر')"><span class="text-lg">📡</span><span class="text-[10px] font-bold">بث مباشر</span></button>
-      <button type="button" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer" onclick="switchTab(this, '⚔️ تحديات الـ PK')"><span class="text-lg">⚔️</span><span class="text-[10px] font-bold">تحديات PK</span></button>
-      <button type="button" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#F59E0B] flex items-center justify-center text-white text-xl shadow-lg border-2 border-[#090812] active-press gold-glow cursor-pointer" onclick="startSovereignStream()">📹</button>
-      <button type="button" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer" onclick="switchTab(this, '🎁 خزانة الهدايا')"><span class="text-lg">🎁</span><span class="text-[10px] font-bold">الهدايا</span></button>
-      <button type="button" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer" onclick="switchTab(this, '👑 الحساب الشخصي للملك #1')"><span class="text-lg">👑</span><span class="text-[10px] font-bold">الملك #1</span></button>
-    </nav>
-  </div>
-  <script>
-    let lawrenceScore = 520000, opponentScore = 480000, diamonds = 850000, followers = 1200000, viewers = 45200, isLive = true, isEncrypted = true;
-    function showToast(i, m) { const t = document.getElementById('live-toast'); if(!t) return; document.getElementById('toast-icon').innerText = i; document.getElementById('toast-text').innerText = m; t.classList.remove('opacity-0'); t.classList.add('opacity-100', '-translate-y-1'); setTimeout(() => { t.classList.remove('opacity-100', '-translate-y-1'); t.classList.add('opacity-0'); }, 2400); }
-    function boostBattle(p) { lawrenceScore += p; updateBattleUI(); showToast('⚡', 'تم تفعيل الدعم السيادي: +' + p.toLocaleString() + ' نقطة!'); }
-    function updateBattleUI() { const tot = lawrenceScore + opponentScore; const lp = Math.round((lawrenceScore/tot)*100); const op = 100 - lp; document.getElementById('lawrence-pts').innerText = lawrenceScore.toLocaleString() + ' pt'; document.getElementById('power-bar').style.width = lp + '%'; document.getElementById('lawrence-pct').innerText = 'التفوق السيادي ' + lp + '%'; document.getElementById('opponent-pct').innerText = 'الخصم ' + op + '%'; }
-    function sendGift(n, c) { diamonds += Math.round(c * 0.4); lawrenceScore += c; document.getElementById('diamonds-count').innerText = diamonds.toLocaleString(); updateBattleUI(); showToast('🎁', 'تم إرسال ' + n + ' وتحويل العائد للأرصدة!'); }
-    function incrementDiamonds() { diamonds += 10000; document.getElementById('diamonds-count').innerText = diamonds.toLocaleString(); showToast('💎', 'تمت إضافة +10,000 ماسة ملكية إلى رصيدك السيادي!'); }
-    function incrementFollowers() { followers += 500; document.getElementById('followers-count').innerText = (followers / 1000000).toFixed(2) + 'M'; showToast('👥', '+500 متابع سيادي جديد انضم للبث الآن!'); }
-    function incrementViewers() { viewers += 120; document.getElementById('viewers-count').innerText = (viewers / 1000).toFixed(1) + 'K'; showToast('🔥', 'ارتفع عدد المشاهدين المتفاعلين لحظياً!'); }
-    function toggleLive() { isLive = !isLive; const b = document.getElementById('live-btn'); const t = document.getElementById('live-status-text'); if(isLive){ b.className = 'text-xs bg-red-600/20 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-full font-bold animate-pulse active-press flex items-center gap-1.5 cursor-pointer'; t.innerText = 'مباشر'; showToast('🔴', 'البث المباشر قيد العمل الآن بكفاءة عالية!'); } else { b.className = 'text-xs bg-neutral-700/40 text-neutral-400 border border-neutral-600 px-2.5 py-1 rounded-full font-bold active-press flex items-center gap-1.5 cursor-pointer'; t.innerText = 'متوقف'; showToast('⏸️', 'تم إيقاف البث مؤقتاً.'); } }
-    function toggleSecurity() { isEncrypted = !isEncrypted; const b = document.getElementById('security-btn'); if(isEncrypted){ b.innerText = '🛡️ تشفير 100%'; b.className = 'text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer'; showToast('🛡️', 'نظام الحماية وتشفير الجلسة نشط بنسبة 100%!'); } else { b.innerText = '⚠️ حماية مخففة'; b.className = 'text-[11px] bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer'; showToast('⚠️', 'تم تخفيف بروتوكول الأمان مؤقتاً.'); } }
-    function toggleAlerts() { showToast('🔔', 'جميع الأنظمة السيادية تعمل بأقصى سرعة واستقرار!'); }
-    function triggerCamera() { showToast('📹', 'تم تفعيل عدسة البث السيادية بدقة 4K!'); }
-    function resetPK() { lawrenceScore = 500000; opponentScore = 500000; updateBattleUI(); showToast('🔄', 'تمت إعادة ضبط نقاط جولة الـ PK للبداية بنجاح!'); }
-    function startSovereignStream() { showToast('📹', 'أهلاً بجلالة الملك لورنس! جاري تهيئة بث المنصة السيادي...'); }
-    function switchTab(el, n) { document.querySelectorAll('.nav-tab').forEach(t => { t.classList.remove('text-[#F59E0B]'); t.classList.add('text-neutral-400'); }); el.classList.remove('text-neutral-400'); el.classList.add('text-[#F59E0B]'); showToast('🧭', 'تم الانتقال إلى: ' + n); }
-    let secondsLeft = 225; setInterval(() => { if (secondsLeft > 0) { secondsLeft--; const m = Math.floor(secondsLeft / 60).toString().padStart(2, '0'); const s = (secondsLeft % 60).toString().padStart(2, '0'); const timerEl = document.getElementById('pk-timer'); if (timerEl) { timerEl.innerText = '⏳ ' + m + ':' + s; } } }, 1000);
-  </script>
-</body>
-                                                                                                                                                                                                                                            </html>
+    <main id="tab-content-pk" class="p-4 space-y-4 tab-section hidden">
+      <div class="bg-gradient-to-r from-red-950/60 to-purple-950/60 border border-red-500/40 rounded-2xl p-4 text-center">
+        <h2 class="text-lg font-black text-yellow-400">⚔️ ساحة البطولات العالمية للـ PK</h2>
+        <p class="text-xs text-neutral-300 mt-1">تحديات البث المباشر بين ملوك المنصة الكبار</p>
+      </div>
+      <div class="bg-[#13121D] border border-[#2C274B] rounded-2xl p-4 space-y-3">
+        <div class="text-sm font-bold text-white flex items-center justify-between"><span>قائمة الخصوم المتاحين للنزال:</span><span class="text-xs text-emerald-400 font-bold">نشط الآن 🟢</span></div>
+        <div class="space-y-2">
+          <div class="bg-[#1C1A25] p-3 rounded-xl border border-[#2C274B] flex items-center justify-between">
+            <div class="flex items-center gap-2"><span class="text-2xl">🦅</span><div><div class="text-xs font-bold text-white">شاهين دبي (المتصدر #2)</div><div class="text-[10px] text-neutral-400">نقاط الفوز: 480K</div></div></div>
+            <button type="button" class="text-xs bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1.5 rounded-lg active-press cursor-pointer" onclick="startCustomBattle('شاهين دبي')">تحدي الآن ⚔️</button>
+          </div>
+          <div class="bg-[#1C1A25] p-3 rounded-xl border border-[#2C274B] flex items-center justify-between">
+            <div class="flex items-center gap-2"><span class="text-2xl">🦁</span><div><div class="text-xs font-bold text-white">أسد الرياض (VIP #3)</div><div class="text-[10px] text-neutral-400">نقاط الفوز: 390K</div></div></div>
+            <button type="button" class="text-xs bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1.5 rounded-lg active-press cursor-pointer" onclick="startCustomBattle('أسد الرياض')">تحدي الآن ⚔️</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <main id="tab-content-vault" class="p-4 space-y-4 tab-section hidden">
+      <div class="bg-[#1C1A25] border border-[#F59E0B]/50 p-4 rounded-2xl gold-glow text-center">
+        <span class="text-3xl">💎</span>
+        <h2 class="text-lg font-black text-white mt-1">خزانة الماسات الملكية</h2>
+        <div class="text-2xl font-black text-[#8B5CF6] mt-1" id="vault-diamonds-display">850,000 💎</div>
+        <p class="text-xs text-ne
