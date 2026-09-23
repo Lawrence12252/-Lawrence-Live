@@ -1,0 +1,579 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const LawrenceLive());
+}
+
+class LawrenceLive extends StatelessWidget {
+  const LawrenceLive({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'لورنس لايف',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xff090812),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff8b5cf6),
+          brightness: Brightness.dark,
+        ),
+        fontFamily: 'Arial',
+      ),
+      home: const MainScreen(),
+    );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int selectedIndex = 0;
+
+  final pages = const [
+    HomePage(),
+    LivePage(),
+    GiftPage(),
+    ChallengePage(),
+    ProfilePage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: pages[selectedIndex],
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: selectedIndex,
+          backgroundColor: const Color(0xff121020),
+          indicatorColor: const Color(0xff6d28d9),
+          onDestinationSelected: (index) {
+            setState(() => selectedIndex = index);
+          },
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'الرئيسية',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.live_tv_outlined),
+              selectedIcon: Icon(Icons.live_tv),
+              label: 'البث',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.card_giftcard_outlined),
+              selectedIcon: Icon(Icons.card_giftcard),
+              label: 'الهدايا',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.emoji_events_outlined),
+              selectedIcon: Icon(Icons.emoji_events),
+              label: 'التحديات',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.person_outline),
+              selectedIcon: Icon(Icons.person),
+              label: 'حسابي',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppLayout(
+      title: 'لورنس لايف',
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const SearchBox(),
+          const SizedBox(height: 18),
+          const SectionTitle(title: 'البثوث المباشرة'),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 190,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: const [
+                LiveCard(name: 'نور لايف', color: Colors.purple),
+                LiveCard(name: 'محمد ستار', color: Colors.blue),
+                LiveCard(name: 'سارة VIP', color: Colors.pink),
+              ],
+            ),
+          ),
+          const SizedBox(height: 22),
+          const SectionTitle(title: 'فيديوهات مقترحة'),
+          const SizedBox(height: 12),
+          const VideoCard(title: 'بث جماعي أسطوري', views: '12.4K مشاهدة'),
+          const VideoCard(title: 'تحدي الهدايا الذهبية', views: '8.9K مشاهدة'),
+          const VideoCard(title: 'أفضل لحظات البث', views: '21K مشاهدة'),
+        ],
+      ),
+    );
+  }
+}
+
+class LivePage extends StatelessWidget {
+  const LivePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppLayout(
+      title: 'البث المباشر',
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          MainButton(
+            text: 'ابدأ بثًا جماعيًا',
+            icon: Icons.groups,
+            onPressed: () => showMessage(context, 'تم تجهيز البث الجماعي'),
+          ),
+          const SizedBox(height: 12),
+          MainButton(
+            text: 'ابدأ بثًا خاصًا',
+            icon: Icons.lock,
+            onPressed: () => showMessage(context, 'اختر الشخص الذي تريد دعوته'),
+          ),
+          const SizedBox(height: 22),
+          const SectionTitle(title: 'إعدادات البث'),
+          const SettingTile(
+            icon: Icons.people,
+            title: 'من يستطيع دخول البث؟',
+            value: 'الجميع',
+          ),
+          const SettingTile(
+            icon: Icons.notifications,
+            title: 'إشعار المتابعين',
+            value: 'مفعّل',
+          ),
+          const SettingTile(
+            icon: Icons.card_giftcard,
+            title: 'السماح بالهدايا',
+            value: 'مفعّل',
+          ),
+          const SettingTile(
+            icon: Icons.security,
+            title: 'حماية البث',
+            value: 'عالية',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class GiftPage extends StatelessWidget {
+  const GiftPage({super.key});
+
+  final gifts = const [
+    ['👑', 'التاج الملكي', '1,000'],
+    ['🐉', 'التنين الذهبي', '5,000'],
+    ['🏰', 'القلعة الماسية', '10,000'],
+    ['🚀', 'الصاروخ الأسطوري', '25,000'],
+    ['💎', 'الماسة الكبرى', '50,000'],
+    ['🌌', 'مجرة لورنس', '100,000'],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return AppLayout(
+      title: 'متجر الهدايا',
+      child: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: gifts.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: .9,
+        ),
+        itemBuilder: (context, index) {
+          final gift = gifts[index];
+
+          return Card(
+            color: const Color(0xff18152b),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(22),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(gift[0], style: const TextStyle(fontSize: 48)),
+                  const SizedBox(height: 8),
+                  Text(
+                    gift[1],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${gift[2]} عملة',
+                    style: const TextStyle(color: Colors.amber),
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      showMessage(context, 'اختر الشخص الذي تريد إرسال الهدية له');
+                    },
+                    child: const Text('إرسال'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ChallengePage extends StatelessWidget {
+  const ChallengePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppLayout(
+      title: 'التحديات',
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const ChallengeCard(
+            title: 'تحدي التنين الذهبي',
+            teamOne: 'فريق لورنس',
+            teamTwo: 'فريق النجوم',
+            scoreOne: '24,500',
+            scoreTwo: '19,800',
+          ),
+          const ChallengeCard(
+            title: 'معركة الهدايا',
+            teamOne: 'نور لايف',
+            teamTwo: 'محمد ستار',
+            scoreOne: '12,300',
+            scoreTwo: '12,100',
+          ),
+          const SizedBox(height: 14),
+          MainButton(
+            text: 'إنشاء تحدي جديد',
+            icon: Icons.add_circle,
+            onPressed: () => showMessage(context, 'سيتم إنشاء تحدي جديد'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppLayout(
+      title: 'حسابي',
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const CircleAvatar(
+            radius: 48,
+            backgroundColor: Colors.deepPurple,
+            child: Icon(Icons.person, size: 55),
+          ),
+          const SizedBox(height: 10),
+          const Center(
+            child: Text(
+              'لورنس الرسمي',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Center(
+            child: Text(
+              'المستوى 25 • VIP',
+              style: TextStyle(color: Colors.amber),
+            ),
+          ),
+          const SizedBox(height: 22),
+          const SettingTile(
+            icon: Icons.account_balance_wallet,
+            title: 'رصيد العملات',
+            value: '125,400',
+          ),
+          const SettingTile(
+            icon: Icons.monetization_on,
+            title: 'الأرباح',
+            value: '2,450 دولار',
+          ),
+          const SettingTile(
+            icon: Icons.admin_panel_settings,
+            title: 'لوحة التحكم',
+            value: 'للمالك فقط',
+          ),
+          const SettingTile(
+            icon: Icons.group,
+            title: 'إدارة المساعدين',
+            value: '3 مساعدين',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AppLayout extends StatelessWidget {
+  final String title;
+  final Widget child;
+
+  const AppLayout({
+    super.key,
+    required this.title,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const Icon(Icons.notifications_none, color: Colors.amber),
+              ],
+            ),
+          ),
+          Expanded(child: child),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchBox extends StatelessWidget {
+  const SearchBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: 'ابحث عن شخص أو بث أو فيديو',
+        prefixIcon: const Icon(Icons.search),
+        filled: true,
+        fillColor: const Color(0xff18152b),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(18),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
+}
+
+class LiveCard extends StatelessWidget {
+  final String name;
+  final Color color;
+
+  const LiveCard({
+    super.key,
+    required this.name,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 145,
+      margin: const EdgeInsets.only(left: 12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(.35),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: color, width: 1.5),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 35,
+            backgroundColor: color,
+            child: const Icon(Icons.person, size: 40),
+          ),
+          const SizedBox(height: 12),
+          Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 6),
+          const Text('● مباشر', style: TextStyle(color: Colors.redAccent)),
+        ],
+      ),
+    );
+  }
+}
+
+class VideoCard extends StatelessWidget {
+  final String title;
+  final String views;
+
+  const VideoCard({
+    super.key,
+    required this.title,
+    required this.views,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xff18152b),
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: const CircleAvatar(
+          backgroundColor: Colors.deepPurple,
+          child: Icon(Icons.play_arrow),
+        ),
+        title: Text(title),
+        subtitle: Text(views),
+        trailing: const Icon(Icons.more_vert),
+      ),
+    );
+  }
+}
+
+class ChallengeCard extends StatelessWidget {
+  final String title;
+  final String teamOne;
+  final String teamTwo;
+  final String scoreOne;
+  final String scoreTwo;
+
+  const ChallengeCard({
+    super.key,
+    required this.title,
+    required this.teamOne,
+    required this.teamTwo,
+    required this.scoreOne,
+    required this.scoreTwo,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xff18152b),
+      margin: const EdgeInsets.only(bottom: 14),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    const Icon(Icons.shield, color: Colors.amber, size: 38),
+                    Text(teamOne),
+                    Text(scoreOne, style: const TextStyle(color: Colors.amber)),
+                  ],
+                ),
+                const Text('VS', style: TextStyle(fontSize: 20)),
+                Column(
+                  children: [
+                    const Icon(Icons.stars, color: Colors.cyan, size: 38),
+                    Text(teamTwo),
+                    Text(scoreTwo, style: const TextStyle(color: Colors.cyan)),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SettingTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String value;
+
+  const SettingTile({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color(0xff18152b),
+      child: ListTile(
+        leading: Icon(icon, color: Colors.amber),
+        title: Text(title),
+        trailing: Text(
+          value,
+          style: const TextStyle(color: Colors.cyan),
+        ),
+      ),
+    );
+  }
+}
+
+class MainButton extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  const MainButton({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 55,
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon),
+        label: Text(text),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xff6d28d9),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(17),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+void showMessage(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(message)),
+  );
+}
