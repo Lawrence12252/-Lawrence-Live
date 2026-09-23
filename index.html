@@ -6,7 +6,7 @@
   <title>لورنس لايف | التحكم السيادي المطلق VIP +21</title>
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -161,9 +161,7 @@
             🚀 سحق الخصم +100K
           </button>
         </div>
-      </div>
-
-      <div>
+  </div>      <div>
         <div class="flex items-center justify-between mb-2.5">
           <h2 class="text-sm font-black text-white flex items-center gap-1.5">
             🎁 متجر الهدايا والمؤثرات ثلاثية الأبعاد
@@ -284,4 +282,258 @@
     </main>
 
     <main id="tab-content-profile" class="tab-section hidden p-4 space-y-4">
-      <div class="bg-[#13121D] border border-[#2C274B] p-4 rounded-2xl space-y-3
+      <div class="bg-[#13121D] border border-[#2C274B] p-4 rounded-2xl space-y-3">
+        <div class="text-center">
+          <div class="w-20 h-20 mx-auto rounded-full border-2 border-yellow-400 p-1 gold-glow bg-black flex items-center justify-center text-4xl mb-2">🤴</div>
+          <h2 class="text-base font-black text-white">جلالة المالك والمؤسس لورنس</h2>
+          <span class="text-xs bg-[#F59E0B] text-black font-black px-2 py-0.5 rounded-full">حاكم منصة لورنس لايف #1</span>
+        </div>
+        <div class="bg-[#1C1A25] p-3 rounded-xl space-y-1.5 text-xs text-neutral-300">
+          <div class="flex justify-between"><span>معرف المالك:</span><span class="font-mono text-yellow-400 font-bold">#LAW-0001-ROOT</span></div>
+          <div class="flex justify-between"><span>مستوى الحساب:</span><span class="text-purple-400 font-bold">VIP +21 الإمبراطوري</span></div>
+          <div class="flex justify-between"><span>مفتاح الأمان السيادي:</span><span class="text-emerald-400 font-bold">مشفر ومحمي 100% 🛡️</span></div>
+        </div>
+        <button type="button" onclick="showToast('🔒', 'تم قفل لوحة التحكم السيادية بأمان تام')" class="w-full py-2 bg-red-600/20 text-red-400 border border-red-500/40 rounded-xl text-xs font-bold active-press cursor-pointer">إعادة تعيين مفتاح الأمان 🔑</button>
+      </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#13121D]/95 backdrop-blur-lg border-t border-[#2C274B] py-2 px-4 flex justify-between items-center z-50">
+      <button type="button" onclick="switchTab(this, 'stream')" class="nav-tab flex flex-col items-center gap-0.5 text-[#F59E0B] active-press cursor-pointer">
+        <span class="text-lg">📡</span>
+        <span class="text-[10px] font-bold">بث مباشر</span>
+      </button>
+
+      <button type="button" onclick="switchTab(this, 'pk')" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer">
+        <span class="text-lg">⚔️</span>
+        <span class="text-[10px] font-bold">تحديات PK</span>
+      </button>
+
+      <button type="button" onclick="startSovereignStream()" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#F59E0B] flex items-center justify-center text-white text-xl shadow-lg border-2 border-[#090812] active-press gold-glow cursor-pointer">
+        📹
+      </button>
+
+      <button type="button" onclick="switchTab(this, 'vault')" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer">
+        <span class="text-lg">🎁</span>
+        <span class="text-[10px] font-bold">الخزانة</span>
+      </button>
+
+      <button type="button" onclick="switchTab(this, 'profile')" class="nav-tab flex flex-col items-center gap-0.5 text-neutral-400 hover:text-white active-press cursor-pointer">
+        <span class="text-lg">👑</span>
+        <span class="text-[10px] font-bold">الملك #1</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    let lawrenceScore = 520000;
+    let opponentScore = 480000;
+    let diamonds = 850000;
+    let followers = 1200000;
+    let viewers = 45200;
+    let isLive = true;
+    let isEncrypted = true;
+
+    function showToast(icon, message) {
+      const toast = document.getElementById('live-toast');
+      const iconEl = document.getElementById('toast-icon');
+      const textEl = document.getElementById('toast-text');
+      if (!toast) return;
+      iconEl.innerText = icon;
+      textEl.innerText = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100', '-translate-y-1');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', '-translate-y-1');
+        toast.classList.add('opacity-0');
+      }, 2500);
+    }
+
+    function triggerKingAura() {
+      const container = document.getElementById('app-container');
+      container.classList.add('shake-screen');
+      setTimeout(() => container.classList.remove('shake-screen'), 400);
+      showToast('👑', 'هيبة الملك لورنس تهز ساحة البث بالكامل!');
+    }
+
+    function boostBattle(points) {
+      lawrenceScore += points;
+      updateBattleUI();
+      const container = document.getElementById('app-container');
+      container.classList.add('shake-screen');
+      setTimeout(() => container.classList.remove('shake-screen'), 300);
+      showToast('⚡', 'تم تفعيل الدعم السيادي: +' + points.toLocaleString() + ' نقطة!');
+    }
+
+    function boostOpponent(points) {
+      opponentScore += points;
+      updateBattleUI();
+      showToast('🦅', 'الخصم أضاف +' + points.toLocaleString() + ' نقطة!');
+    }
+
+    function updateBattleUI() {
+      const total = lawrenceScore + opponentScore;
+      const lPercent = Math.max(5, Math.min(95, Math.round((lawrenceScore / total) * 100)));
+      const oPercent = 100 - lPercent;
+      document.getElementById('lawrence-pts').innerText = lawrenceScore.toLocaleString() + ' pt';
+      document.getElementById('opponent-pts').innerText = opponentScore.toLocaleString() + ' pt';
+      document.getElementById('power-bar').style.width = lPercent + '%';
+      document.getElementById('lawrence-pct').innerText = 'التفوق السيادي ' + lPercent + '%';
+      document.getElementById('opponent-pct').innerText = 'الخصم ' + oPercent + '%';
+    }
+
+    function sendGift(giftName, cost, icon) {
+      diamonds += Math.round(cost * 0.4);
+      lawrenceScore += cost;
+      document.getElementById('diamonds-count').innerText = diamonds.toLocaleString();
+      const vaultEl = document.getElementById('vault-diamonds-display');
+      if (vaultEl) vaultEl.innerText = diamonds.toLocaleString() + ' 💎';
+      updateBattleUI();
+
+      const vfx = document.getElementById('fullscreen-vfx');
+      const vfxIcon = document.getElementById('vfx-icon');
+      const vfxTitle = document.getElementById('vfx-title');
+      vfxIcon.innerText = icon;
+      vfxTitle.innerText = giftName;
+      vfx.classList.remove('hidden');
+      vfx.classList.add('gift-anim');
+      const container = document.getElementById('app-container');
+      container.classList.add('shake-screen');
+      setTimeout(() => container.classList.remove('shake-screen'), 400);
+
+      setTimeout(() => {
+        vfx.classList.add('hidden');
+        vfx.classList.remove('gift-anim');
+      }, 1200);
+
+      showToast('🎁', 'تم إطلاق ' + giftName + ' وتحويل 40% للأرصدة!');
+    }
+
+    function incrementDiamonds() {
+      diamonds += 10000;
+      document.getElementById('diamonds-count').innerText = diamonds.toLocaleString();
+      const vaultEl = document.getElementById('vault-diamonds-display');
+      if (vaultEl) vaultEl.innerText = diamonds.toLocaleString() + ' 💎';
+      showToast('💎', 'تمت إضافة +10,000 ماسة ملكية إلى رصيدك السيادي!');
+    }
+
+    function incrementFollowers() {
+      followers += 500;
+      document.getElementById('followers-count').innerText = (followers / 1000000).toFixed(2) + 'M';
+      showToast('👥', '+500 متابع سيادي جديد انضم للبث الآن!');
+    }
+
+    function incrementViewers() {
+      viewers += 120;
+      document.getElementById('viewers-count').innerText = (viewers / 1000).toFixed(1) + 'K';
+      showToast('🔥', 'ارتفع عدد المشاهدين المتفاعلين لحظياً!');
+    }
+
+    function toggleLive() {
+      isLive = !isLive;
+      const btn = document.getElementById('live-btn');
+      const txt = document.getElementById('live-status-text');
+      if (isLive) {
+        btn.className = 'text-xs bg-red-600/20 text-red-400 border border-red-500/40 px-2.5 py-1 rounded-full font-bold animate-pulse active-press flex items-center gap-1.5 cursor-pointer';
+        txt.innerText = 'مباشر';
+        showToast('🔴', 'البث المباشر قيد العمل الآن بكفاءة عالية!');
+      } else {
+        btn.className = 'text-xs bg-neutral-700/40 text-neutral-400 border border-neutral-600 px-2.5 py-1 rounded-full font-bold active-press flex items-center gap-1.5 cursor-pointer';
+        txt.innerText = 'متوقف';
+        showToast('⏸️', 'تم إيقاف البث مؤقتاً.');
+      }
+    }
+
+    function toggleSecurity() {
+      isEncrypted = !isEncrypted;
+      const btn = document.getElementById('security-btn');
+      if (isEncrypted) {
+        btn.innerHTML = '🛡️ تشفير 100%';
+        btn.className = 'text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer flex items-center gap-1';
+        showToast('🛡️', 'نظام الحماية وتشفير الجلسة نشط بنسبة 100%!');
+      } else {
+        btn.innerHTML = '⚠️ حماية مخففة';
+        btn.className = 'text-[11px] bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 px-2.5 py-1.5 rounded-lg font-bold active-press cursor-pointer flex items-center gap-1';
+        showToast('⚠️', 'تم تخفيف بروتوكول الأمان مؤقتاً.');
+      }
+    }
+
+    function toggleAlerts() {
+      showToast('🔔', 'جميع الأنظمة السيادية تعمل بأقصى سرعة واستقرار!');
+    }
+
+    function triggerCamera() {
+      showToast('📹', 'تم تفعيل عدسة البث السيادية بدقة 4K فائقة الوضوح!');
+    }
+
+    function resetPK() {
+      lawrenceScore = 500000;
+      opponentScore = 500000;
+      updateBattleUI();
+      showToast('🔄', 'تمت إعادة ضبط نقاط جولة الـ PK للبداية بنجاح!');
+    }
+
+    function withdrawDiamonds() {
+      showToast('💰', 'جاري تحويل أرباح الماسات مباشرة إلى الحساب السيادي للمالك!');
+    }
+
+    function toggleAudienceChat() {
+      showToast('💬', 'شات البث يعمل بكامل طاقته ومفلتر بنظام الذكاء الاصطناعي!');
+    }
+
+    function startCustomBattle(name) {
+      showToast('⚔️', 'بدأ التحدي الملكي الحاسم ضد ' + name + '!');
+      switchTab(document.querySelector('.nav-tab'), 'stream');
+    }
+
+    function startSovereignStream() {
+      showToast('📹', 'أهلاً بجلالة الملك لورنس! جاري تهيئة بث المنصة السيادي المباشر...');
+    }
+
+    function switchTab(element, tabId) {
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.remove('text-[#F59E0B]');
+        tab.classList.add('text-neutral-400');
+      });
+      element.classList.remove('text-neutral-400');
+      element.classList.add('text-[#F59E0B]');
+
+      document.querySelectorAll('.tab-section').forEach(sec => {
+        sec.classList.add('hidden');
+        sec.classList.remove('block');
+      });
+
+      const activeSection = document.getElementById('tab-content-' + tabId);
+      if (activeSection) {
+        activeSection.classList.remove('hidden');
+        activeSection.classList.add('block');
+      }
+
+      const container = document.getElementById('app-container');
+      container.classList.add('shake-screen');
+      setTimeout(() => container.classList.remove('shake-screen'), 250);
+
+      const tabTitles = {
+        'stream': '📡 البث المباشر والتحكم',
+        'pk': '⚔️ ساحة تحديات PK',
+        'vault': '🎁 خزانة الماسات الملكية',
+        'profile': '👑 حساب المالك السيادي #1'
+      };
+      showToast('🧭', 'تم الانتقال إلى: ' + (tabTitles[tabId] || tabId));
+    }
+
+    let secondsLeft = 225;
+    setInterval(() => {
+      if (secondsLeft > 0) {
+        secondsLeft--;
+        const m = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+        const s = (secondsLeft % 60).toString().padStart(2, '0');
+        const timerEl = document.getElementById('pk-timer');
+        if (timerEl) {
+          timerEl.innerText = '⏳ ' + m + ':' + s;
+        }
+      }
+    }, 1000);
+  </script>
+</body>
+          </html>
